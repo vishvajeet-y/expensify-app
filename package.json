@@ -1,0 +1,62 @@
+{
+  "name": "expense-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "engines": {
+    "node": "^12.15.0",
+    "yarn": "^1.22.10"
+  },
+  "scripts": {
+    "build:dev": "webpack --mode development",
+    "build:prod": "webpack --mode production --env production",
+    "dev-server": "webpack serve",
+    "test": "cross-env NODE_ENV=test jest --config=jest.config.json",
+    "start": "node Server/server.js",
+    "heroku-postbuild": "yarn run build:prod"
+  },
+  "dependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.12.13",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.0",
+    "express": "^4.17.1",
+    "firebase": "^8.4.3",
+    "mini-css-extract-plugin": "^1.5.1",
+    "moment": "^2.29.1",
+    "node-sass": "4.14.1",
+    "normalize.css": "^8.0.1",
+    "numeral": "^2.0.6",
+    "raf": "^3.4.1",
+    "react": "^17.0.1",
+    "react-addons-shallow-compare": "^15.6.3",
+    "react-dates": "^21.8.0",
+    "react-dom": "^17.0.1",
+    "react-modal": "^3.12.1",
+    "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
+    "redux": "^4.0.5",
+    "redux-mock-store": "^1.5.4",
+    "redux-thunk": "^2.3.0",
+    "sass-loader": "7.3.1",
+    "style-loader": "^2.0.0",
+    "uuid": "^8.3.2",
+    "validator": "^13.5.2",
+    "webpack": "^5.27.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^9.0.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
+    "jest": "^26.6.3",
+    "jest-enzyme": "^7.1.2",
+    "react-test-renderer": "^17.0.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
+  }
+}

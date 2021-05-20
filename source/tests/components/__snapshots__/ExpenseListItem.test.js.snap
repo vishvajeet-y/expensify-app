@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render expenseList Item 1`] = `
+<div>
+  <Link
+    to="./edit/1"
+  >
+     
+    <h3>
+      GUM
+    </h3>
+  </Link>
+  <p>
+    Ammount: 
+    ₹10.00
+     
+  </p>
+  <p>
+     Date :
+    1st January,1970
+  </p>
+</div>
+`;
