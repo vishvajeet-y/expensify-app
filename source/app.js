@@ -5,7 +5,7 @@ import 'normalize.css/normalize.css'
 import './style/style.scss'
 import AppRouter from  './router/AppRouter'
 import configureStore from './store/configureStore'
-import {addExpense} from './actions/expenses'
+import {startSetExpense} from './actions/expenses'
 import {setTextFilter} from './actions/filters'
 import getVisibleExpenses from './selectors/expenses'
 import 'react-dates/lib/css/_datepicker.css'
@@ -34,6 +34,8 @@ const jsx=(
 
     </Provider>
 )
+ReactDOM.render(<p>Loading...</p> ,document.getElementById("app"))
+store.dispatch(startSetExpense()).then(()=>{
+    ReactDOM.render(jsx ,document.getElementById("app"))
 
-
-ReactDOM.render(jsx ,document.getElementById("app"))
+})

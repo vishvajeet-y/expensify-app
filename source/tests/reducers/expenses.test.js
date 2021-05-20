@@ -67,3 +67,13 @@ test('should remove expenses by id',()=>{
     const state=expenseReducer(expenses,action)
     expect(state).toEqual([...expenses,expense])
  })
+
+
+ test('should set expenses',()=>{
+     const action={
+         type:'SET_EXPENSE',
+         expenses:[expenses[1]]
+     }
+     const state=expenseReducer(expenses,action)
+     expect(state).toEqual([expenses[1]])
+ })
