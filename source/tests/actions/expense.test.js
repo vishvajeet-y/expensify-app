@@ -1,5 +1,5 @@
 import {removeExpense,addExpense,editExpense, startAddExpense,setExpense
-    ,startSetExpense,startRemoveExpense} from '../../actions/expenses'
+    ,startSetExpense,startRemoveExpense,startEditExpense} from '../../actions/expenses'
 import expenses from '../fixture/expenses'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
@@ -33,7 +33,7 @@ test('should remove action from firebase',(done)=>{
             type:'REMOVE_EXPENSE',
             id
         })
-        return database.ref(`expenses/${id}`).once('value')
+        return database.ref(`expenses/${id}`).once('value')//Promise Chaining
     }).then((snapshot)=>{
         expect(snapshot.val()).toBeFalsy()
         done()
@@ -55,6 +55,23 @@ test('should setup edit expense action object',()=>{
             desc:'hello',
             ammount:400
         }     
+    })
+})
+
+test('should edit expenses in firebase',(done)=>{
+    const store=createMockStore({})
+    const id=expenses[0].id
+    const updates={ammount:210.03}
+    store.dispatch(startEditExpense(id,updates)).then(()=>{
+        const actions=store.getActions()
+        expect(actions[0]).toEqual({
+            type:'EDIT_EXPENSE',
+            id,updates
+        })
+        return database.ref(`expenses/${id}`).once('value') //Promise Chaining
+    }).then((snapshot)=>{
+           expect(snapshot.val().ammount).toBe(updates.ammount)
+           done()
     })
 })
 
