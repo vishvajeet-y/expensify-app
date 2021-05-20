@@ -4,15 +4,15 @@ import ExpenseForm from '../../components/ExpenseForm'
 import {EditExpensePage} from '../../components/EditExpensePage'
 import expenses from '../fixture/expenses'
 
-let editExpense,removeExpense,history,wrapper
+let editExpense,startRemoveExpense,history,wrapper
 
 beforeEach(()=>{
     editExpense=jest.fn()
-    removeExpense=jest.fn()
+    startRemoveExpense=jest.fn()
     history={push:jest.fn()}
     wrapper=shallow(<EditExpensePage 
           editExpense={editExpense}
-          removeExpense={removeExpense}
+          startRemoveExpense={startRemoveExpense}
           history={history}
           expense={expenses[2]}
         />)
@@ -29,10 +29,10 @@ test('should handle editExpense',()=>{
     expect(editExpense).toHaveBeenCalledWith(expenses[2].id,expenses[2])
 })
 
-test('should handle removeExpense',()=>{
+test('should handle startRemoveExpense',()=>{
     wrapper.find('button').simulate('click')
     expect(history.push).toHaveBeenCalledWith('/')
-    expect(removeExpense).toHaveBeenCalledWith(
+    expect(startRemoveExpense).toHaveBeenCalledWith(
         expenses[2].id
     )
 })
