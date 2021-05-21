@@ -22,7 +22,7 @@ numeral.register('locale', 'in', {
 const ExpenseListItem= ({id,description,ammount,createAt})=>{
 
   return  <div>
-    <Link to={`./edit/${id}`}> <h3>{description}</h3></Link>
+    <Link to={`/edit/${id}`}> <h3>{description}</h3></Link>
     
     <p>
     

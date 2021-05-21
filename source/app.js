@@ -3,30 +3,15 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import 'normalize.css/normalize.css'
 import './style/style.scss'
-import AppRouter from  './router/AppRouter'
+import 'react-dates/lib/css/_datepicker.css'
+import AppRouter,{history} from  './router/AppRouter'
 import configureStore from './store/configureStore'
 import {startSetExpense} from './actions/expenses'
-import {setTextFilter} from './actions/filters'
-import getVisibleExpenses from './selectors/expenses'
-import 'react-dates/lib/css/_datepicker.css'
-import './Firebase/firebase'
+import {login,logout} from './actions/auth'
+import {firebase} from  './Firebase/firebase'
+
 
 const store=configureStore()
-
-console.log('test')
-
-// store.dispatch(addExpense({description:'Water bill',ammount:200}))
-// store.dispatch(addExpense({description:'Gas bill',createAt:100}))
-// store.dispatch(addExpense({description:'Rent',ammount:850}))
-// store.dispatch(setTextFilter('water'))
-
-// setTimeout(()=>{
-//     store.dispatch(setTextFilter('bill'))
-// },3000)
-
-// const state=store.getState()
-// const visibleExpenses=getVisibleExpenses(state.expenses,state.filters)
-// console.log(visibleExpenses)
 
 const jsx=(
     <Provider store={store}>
@@ -34,8 +19,44 @@ const jsx=(
 
     </Provider>
 )
+
+let hasRendered=false
+const renderApp=()=>{
+    if(!hasRendered)
+    {
+        ReactDOM.render(jsx ,document.getElementById("app"))
+        hasRendered=true
+    }
+}
+
 ReactDOM.render(<p>Loading...</p> ,document.getElementById("app"))
-store.dispatch(startSetExpense()).then(()=>{
-    ReactDOM.render(jsx ,document.getElementById("app"))
+
+
+firebase.auth().onAuthStateChanged((user)=>{
+    if(user)
+    {
+        store.dispatch(login(user.uid))
+       //console.log('Log in')
+      // console.log(user.uid)
+        store.dispatch(startSetExpense()).then(()=>{
+           renderApp()
+       //    console.log(history.location.pathname)
+          if(history.location.pathname==='/')
+          {
+              //console.log('hello')
+              history.push('/dashboard')
+          }
+
+
+        })   
+    }
+    
+    else
+    {
+        console.log('Log Out')
+        store.dispatch(logout())
+        renderApp()
+        history.push('/')
+    }
 
 })
