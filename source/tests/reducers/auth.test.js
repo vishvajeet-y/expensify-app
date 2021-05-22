@@ -1,4 +1,3 @@
-import { TestScheduler } from '@jest/core'
 import React from 'react'
 import authReducer from '../../reducers/auth'
 
