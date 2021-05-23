@@ -50,7 +50,7 @@ export default class ExpenseForm extends React.Component{
          e.preventDefault()
 
          if(!this.state.description||!this.state.ammount){
-            this.setState(()=>({error:'Please fill both Description and Ammount'}))
+            this.setState(()=>({error:'Please provide Description and Ammount'}))
          }
          else{
             this.setState(()=>({error:''}))
@@ -64,13 +64,13 @@ export default class ExpenseForm extends React.Component{
      }
 
     render(){
-        return  <div>
-             {this.state.error&&<p>{this.state.error}</p>}
-            <form onSubmit={this.onSubmit}>
-            <input type='text' placeholder='Description' autoFocus value={this.state.description} 
+        return  <form className="form" onSubmit={this.onSubmit}>
+            {this.state.error&&<p className="form__error">{this.state.error}</p>}
+            <input type='text' placeholder='Description' className="text-input"
+            autoFocus value={this.state.description} 
                onChange={this.onDescriptionChange}/>
             <input type='text' placeholder='Ammount' value={this.state.ammount}
-                onChange={this.onAmmountChange}
+            className="text-input"  onChange={this.onAmmountChange}
                 />
                 <SingleDatePicker
                 date={this.state.createAt}
@@ -79,13 +79,18 @@ export default class ExpenseForm extends React.Component{
                 onFocusChange={this.onFocusChange}
                 numberOfMonths={1}
                 isOutsideRange={()=>false}
+                block
+                displayFormat='DD/MM/YYYY'
                 />
             <textarea placeholder='Add a note for your expense (optional)'value={this.state.note}
-            onChange={this.onNoteChange}
+           className="textarea" onChange={this.onNoteChange}
             ></textarea>
-            <button>Add Expense</button>
+            <div>
+            <button className="button">Save Expense</button>
+            </div>
+            
             </form>
-             </div>
+           
         
     }
 }

@@ -9,7 +9,7 @@ import configureStore from './store/configureStore'
 import {startSetExpense} from './actions/expenses'
 import {login,logout} from './actions/auth'
 import {firebase} from  './Firebase/firebase'
-
+import LoadingPage from './components/LoadingPage'
 
 const store=configureStore()
 
@@ -29,7 +29,7 @@ const renderApp=()=>{
     }
 }
 
-ReactDOM.render(<p>Loading...</p> ,document.getElementById("app"))
+ReactDOM.render(<LoadingPage /> ,document.getElementById("app"))
 
 
 firebase.auth().onAuthStateChanged((user)=>{

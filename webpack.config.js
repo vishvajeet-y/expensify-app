@@ -18,13 +18,12 @@ module.exports =(env,argv)=>{
     const isProduction = argv.mode === 'production'
    
  return {
-    mode: 'development',
-    entry:"./source/app.js",
+    entry:["babel-polyfill","./source/app.js"],
     output:{
     path:path.join(__dirname,'public','dist'),
     filename:'bundle.js'
     },
-
+    target: ['web', 'es5'],
 module:{
     rules:[{
         loader:'babel-loader',
@@ -39,7 +38,8 @@ module:{
             {
                 loader: 'css-loader',
                 options: {
-                    sourceMap: true
+                    sourceMap: true,
+                    url:false
                 }
             },
             {
